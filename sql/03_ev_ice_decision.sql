@@ -1,9 +1,10 @@
 -- Analytics: EV-vs-ICE decision rule (R_cost = 1.10, R_co2 = 1.00) for CH / DE / FR.
 -- Fleet-average comparison of operational cost (EUR/km) and operational CO2 (g/km).
 --
--- Fleet definitions (BASELINE — MongoDB is reconciled to these numbers):
---   * ICE fleet : catalogue Petrol + Diesel vehicles with matched emission data (n ~ 165,
---                 avg ~10.06 L/100km, ~235 gCO2/km). See `ice_fleet`.
+-- Fleet definitions (canonical — identical to MongoDB 04_analytics.js):
+--   * ICE fleet : all Petrol + Diesel vehicles with emission data (n = 3812,
+--                 avg ~10.03 L/100km, ~235 gCO2/km). The loader fills vehicle +
+--                 ice_emission from the full CO2 registry. See `ice_fleet`.
 --   * EV  fleet : all spec-sheet EVs with valid battery & range in `ev_spec` (n = 32,
 --                 consumption derived as battery/range*100, avg ~18.5 kWh/100km). See `ev_fleet`.
 --   * CO2/km EV : country-level grid CO2 intensity (gCO2/kWh) from Ember (stg_ember_electricity).

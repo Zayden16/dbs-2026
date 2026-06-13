@@ -4,14 +4,15 @@
 USE ev_project;
 
 -- ---------------------------------------------------------------------------
--- COUNTRY (CH, DE, FR) — fuel prices are illustrative reference values (EUR/L)
--- for the use-case year — replace if you ingest a dedicated fuel-price source.
+-- COUNTRY (CH, DE, FR) — real fuel prices (EUR/L) from datasets/fuel_prices.csv.
+-- These values MUST match the MongoDB `countries` collection so SQL and NoSQL
+-- reconcile to the same cost/km (canonical methodology).
 -- ---------------------------------------------------------------------------
 INSERT INTO country (country_code, country_name, petrol_price_eur_per_l, diesel_price_eur_per_l)
 VALUES
-  ('CH', 'Switzerland', 1.859, 1.929),
-  ('DE', 'Germany',     1.749, 1.649),
-  ('FR', 'France',      1.779, 1.699);
+  ('CH', 'Switzerland', 1.670, 1.800),
+  ('DE', 'Germany',     1.850, 1.760),
+  ('FR', 'France',      1.790, 1.750);
 
 -- ---------------------------------------------------------------------------
 -- ELECTRICITY_PRICE — Eurostat (DE, FR) + Swiss BFE-style averages (CH, ct/kWh → EUR/kWh)
@@ -239,44 +240,96 @@ SET v.vehicle_class = c.vehicle_class
 WHERE v.vehicle_class IS NULL;
 
 -- ---------------------------------------------------------------------------
--- ICE_EMISSION — one representative ICE row per vehicle (lowest combined L/100km)
+-- ICE_EMISSION — full CO2 registry as 3NF vehicles + emissions (1:1 per stg_co2).
+-- Mirrors the MongoDB `vehicles` collection (every co2.csv row becomes a vehicle
+-- with an embedded ice_emission). The analytics query filters the fleet to
+-- fuel_type IN ('Petrol','Diesel') -> 3812 rows, identical to MongoDB.
+--
+-- Gap-proof 1:1 link without surrogate keys (InnoDB auto-increment can leave
+-- gaps under interleaved lock mode, so id arithmetic is unsafe). Step 1 inserts
+-- one vehicle per stg_co2 row in a fixed order. Step 2 matches vehicle <-> stg_co2
+-- on (make, model, fuel_type) and aligned ROW_NUMBER(): within each group the
+-- vehicle_id ascending order equals the stg_co2 attribute order (same ORDER BY),
+-- so rn pairs each vehicle with its source row regardless of id gaps.
+-- @ice_v0 fences off the catalogue vehicles inserted above (co2 vehicles get the
+-- larger ids). Fuel codes: X=Petrol, Z=Premium Petrol, D=Diesel, E=E85, N=Natural Gas.
 -- ---------------------------------------------------------------------------
+SET @ice_v0 := (SELECT COALESCE(MAX(vehicle_id), 0) FROM vehicle);
+
+INSERT INTO vehicle (make, model, fuel_type, vehicle_class)
+SELECT make_c, model_c, fuel_c, class_c
+FROM (
+  SELECT
+    NULLIF(TRIM(make), '')          AS make_c,
+    NULLIF(TRIM(model), '')         AS model_c,
+    CASE fuel_type
+      WHEN 'X' THEN 'Petrol'
+      WHEN 'Z' THEN 'Premium Petrol'
+      WHEN 'D' THEN 'Diesel'
+      WHEN 'E' THEN 'E85'
+      WHEN 'N' THEN 'Natural Gas'
+      ELSE 'Unknown'
+    END                             AS fuel_c,
+    NULLIF(TRIM(vehicle_class), '') AS class_c,
+    ROW_NUMBER() OVER (
+      ORDER BY make, model, fuel_type, engine_size_l, cylinders,
+               transmission, fuel_city, fuel_hwy, fuel_comb, co2_gkm
+    ) AS seq
+  FROM stg_co2
+  WHERE co2_gkm IS NOT NULL
+) s
+ORDER BY seq;
+
 INSERT INTO ice_emission (
   vehicle_id, engine_size_l, cylinders, transmission,
   fuel_consumption_city, fuel_consumption_hwy, fuel_consumption_comb, co2_emissions_gkm
 )
 SELECT
-  v.vehicle_id,
-  x.engine_size_l,
-  x.cylinders,
-  x.transmission,
-  x.fuel_city,
-  x.fuel_hwy,
-  x.fuel_comb,
-  x.co2_gkm
-FROM vehicle v
+  vt.vehicle_id,
+  c.engine_size_l, c.cylinders, c.transmission,
+  c.fuel_city, c.fuel_hwy, c.fuel_comb, c.co2_gkm
+FROM (
+  SELECT
+    vehicle_id,
+    UPPER(TRIM(make))  AS mk,
+    UPPER(TRIM(model)) AS md,
+    fuel_type,
+    ROW_NUMBER() OVER (
+      PARTITION BY UPPER(TRIM(make)), UPPER(TRIM(model)), fuel_type
+      ORDER BY vehicle_id
+    ) AS rn
+  FROM vehicle
+  WHERE vehicle_id > @ice_v0
+) vt
 INNER JOIN (
   SELECT
-    UPPER(TRIM(k.make)) AS mk,
-    UPPER(TRIM(k.model)) AS md,
-    k.engine_size_l,
-    k.cylinders,
-    k.transmission,
-    k.fuel_city,
-    k.fuel_hwy,
-    k.fuel_comb,
-    k.co2_gkm,
+    UPPER(TRIM(make))  AS mk,
+    UPPER(TRIM(model)) AS md,
+    CASE fuel_type
+      WHEN 'X' THEN 'Petrol'
+      WHEN 'Z' THEN 'Premium Petrol'
+      WHEN 'D' THEN 'Diesel'
+      WHEN 'E' THEN 'E85'
+      WHEN 'N' THEN 'Natural Gas'
+      ELSE 'Unknown'
+    END AS fuel_c,
+    engine_size_l, cylinders, transmission, fuel_city, fuel_hwy, fuel_comb, co2_gkm,
     ROW_NUMBER() OVER (
-      PARTITION BY UPPER(TRIM(k.make)), UPPER(TRIM(k.model))
-      ORDER BY k.fuel_comb ASC, k.co2_gkm ASC
+      PARTITION BY UPPER(TRIM(make)), UPPER(TRIM(model)),
+        CASE fuel_type
+          WHEN 'X' THEN 'Petrol'
+          WHEN 'Z' THEN 'Premium Petrol'
+          WHEN 'D' THEN 'Diesel'
+          WHEN 'E' THEN 'E85'
+          WHEN 'N' THEN 'Natural Gas'
+          ELSE 'Unknown'
+        END
+      ORDER BY engine_size_l, cylinders, transmission, fuel_city, fuel_hwy, fuel_comb, co2_gkm
     ) AS rn
-  FROM stg_co2 k
-  WHERE k.fuel_type IN ('Z', 'D', 'X', 'N')
-) x
-  ON UPPER(TRIM(v.make)) = x.mk
- AND UPPER(TRIM(v.model)) = x.md
- AND x.rn = 1
-WHERE v.fuel_type IN ('Petrol', 'Diesel', 'Hybrid', 'Petrol/Diesel', 'Plug-in Hybrid', 'Petrol/Hybrid', 'Diesel/Petrol', 'Hybrid (Petrol)', 'Petrol, Diesel', 'Petrol/AWD', 'Petrol, Hybrid', 'plug in hyrbrid', 'Petrol/EV');
+  FROM stg_co2
+  WHERE co2_gkm IS NOT NULL
+) c
+  ON vt.mk = c.mk AND vt.md = c.md AND vt.fuel_type = c.fuel_c AND vt.rn = c.rn;
 
 -- ---------------------------------------------------------------------------
 -- EV_SPEC — full EV fleet from the supplemental spec sheet (n = 32 valid EVs).
@@ -320,9 +373,11 @@ FROM (
     v.vehicle_id,
     CAST(e.battery_capacity_kwh AS DECIMAL(8, 2))  AS battery_capacity_kwh,
     CAST(e.autonomy_wltp_km   AS DECIMAL(10, 2)) AS range_wltp_km,
+    -- 1 decimal to match MongoDB ($round ..., 1) and the DECIMAL(4,1) column
+    -- (avoids double-rounding, e.g. 12.247 -> 12.25 -> 12.3 vs MongoDB 12.2).
     ROUND(
       (CAST(e.battery_capacity_kwh AS DECIMAL(8, 2))
-       / CAST(e.autonomy_wltp_km   AS DECIMAL(10, 2))) * 100.0, 2
+       / CAST(e.autonomy_wltp_km   AS DECIMAL(10, 2))) * 100.0, 1
     ) AS energy_consumption_kwh_100km,
     e.dc_charge_power_kw,
     CAST(REGEXP_SUBSTR(e.ac_charge_power, '[0-9]+(\\.[0-9]+)?', 1, 1) AS DECIMAL(6, 2)) AS ac_charge_power_kw,

@@ -27,13 +27,13 @@ SELECT
   c.country_code,
   c.country_name,
   'FLEET_AVG' AS segment,
-  ROUND(c.petrol_price_eur_per_l * i.l_per_100km / 100.0, 4) AS ice_eur_per_km,
+  ROUND((c.petrol_price_eur_per_l + c.diesel_price_eur_per_l) / 2.0 * i.l_per_100km / 100.0, 4) AS ice_eur_per_km,
   ROUND(e.price_eur_per_kwh * ev.kwh_per_100km / 100.0, 4) AS ev_eur_per_km,
   ROUND(g.co2_g_per_kwh * ev.kwh_per_100km / 100.0, 2) AS ev_co2_g_per_km,
   ROUND(i.co2_gkm_tailpipe, 0) AS ice_co2_g_per_km,
   CASE
     WHEN (e.price_eur_per_kwh * ev.kwh_per_100km / 100.0)
-         <= 1.10 * (c.petrol_price_eur_per_l * i.l_per_100km / 100.0)
+         <= 1.10 * ((c.petrol_price_eur_per_l + c.diesel_price_eur_per_l) / 2.0 * i.l_per_100km / 100.0)
       AND (g.co2_g_per_kwh * ev.kwh_per_100km / 100.0) < i.co2_gkm_tailpipe
     THEN 1
     ELSE 0
