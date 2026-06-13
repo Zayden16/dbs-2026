@@ -17,7 +17,7 @@ dark — assume Yazdan covers the viz queries (now in `metabase/`).
 
 ## P0 — Wrong/contradictory (fix first, they're factual errors)
 
-- [ ] **Kap. 5.1 SQL result table is STALE.** Shows CH 0.1746/0.0420/7.28, DE 0.1816/0.0721/81.97, FR 0.1781/0.0494/15.34. Replace with the canonical table above (now identical to 5.2 Mongo). *(Tabelle 14, Abb. 15 screenshot must be re-shot.)*
+- [x] **Kap. 5.1 SQL result table updated** to the canonical values + real EV/ICE ratios (CH 0.22/0.03, DE 0.38/0.33, FR 0.26/0.06); `03_ev_ice_decision.sql` + `analytics_view` reproduce it exactly. *(Abb. 15 caption says "Screenshot DBeaver" — re-shoot from DBeaver so the figure is a real screenshot, optional.)*
 - [x] **`analytics_view` now exists** — created live (`sql/07_create_analytics_view.sql`), the SQL analogue of Mongo's `mv_ev_decision`, read by Metabase. `SELECT * FROM analytics_view` reproduces the canonical table.
 - [x] **Kap. 5.1 + 7.1.1 query snippets: column names fixed** to match the view (`ice_eur_per_km … recommend_ev, ratio_cost, ratio_co2`); `FROM analytics_view` kept.
 - [x] **Kap. 7.1.1 `WHERE country_code = {{country}}`** (variable form).
