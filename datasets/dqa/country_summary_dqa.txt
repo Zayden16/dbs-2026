@@ -1,0 +1,42 @@
+Data Quality Assessment: country_summary.csv
+============================================================
+
+Delimiter: ','
+Columns: 6
+Headers: ['country_code', 'country', 'station_count', 'port_count', 'fast_station_share', 'fast_port_share']
+Rows: 121
+File size: 5.8 KB
+
+Sample Rows (first 5):
+------------------------------------------------------------
+  Row 1: ['AD', 'Andorra', '96', '259', '0.0625', '0.138996138996139']
+  Row 2: ['AE', 'United Arab Emirates', '131', '346', '0.17557251908396945', '0.41040462427745666']
+  Row 3: ['AF', 'Afghanistan', '1', '1', '0.0', '0.0']
+  Row 4: ['AL', 'Albania', '15', '16', '0.6', '0.5625']
+  Row 5: ['AM', 'Armenia', '4', '6', '0.25', '0.16666666666666666']
+
+Column Analysis:
+------------------------------------------------------------
+  country_code
+    Type: TEXT | Nulls: 0 (0.0%) | Unique: 121
+    Sample values: ['AD', 'AE', 'AF', 'AL', 'AM', 'AR']
+
+  country
+    Type: TEXT | Nulls: 0 (0.0%) | Unique: 121
+    Sample values: ['Afghanistan', 'Aland Islands', 'Albania', 'Andorra', 'Argentina', 'Armenia']
+
+  station_count
+    Type: INTEGER | Nulls: 0 (0.0%) | Unique: 85
+    Sample values: ['1', '10354', '109', '1188', '12', '1241']
+
+  port_count
+    Type: INTEGER | Nulls: 0 (0.0%) | Unique: 92
+    Sample values: ['1', '10', '1098', '11', '1116', '113']
+
+  fast_station_share
+    Type: FLOAT | Nulls: 0 (0.0%) | Unique: 86
+    Sample values: ['0.0', '0.02702702702702703', '0.04375231738969225', '0.04878048780487805', '0.056818181818181816',...
+
+  fast_port_share
+    Type: FLOAT | Nulls: 0 (0.0%) | Unique: 93
+    Sample values: ['0.0', '0.024390243902439025', '0.02654867256637168', '0.02702702702702703', '0.05555555555555555',...

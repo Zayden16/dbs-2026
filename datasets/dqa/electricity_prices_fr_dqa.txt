@@ -1,0 +1,29 @@
+Data Quality Assessment: electricity_prices_fr.csv
+============================================================
+
+Delimiter: ','
+Columns: 3
+Headers: ['Country', 'Category', 'Price_EUR_per_kWh']
+Rows: 4
+File size: 0.2 KB
+
+Sample Rows (first 5):
+------------------------------------------------------------
+  Row 1: ['France', 'National_Regulated_Base', '0.1952']
+  Row 2: ['France', 'Cheapest_Market_Offer', '0.1657']
+  Row 3: ['France', 'Regulated_Peak', '0.2065']
+  Row 4: ['France', 'Regulated_OffPeak', '0.1579']
+
+Column Analysis:
+------------------------------------------------------------
+  Country
+    Type: TEXT | Nulls: 0 (0.0%) | Unique: 1
+    Sample values: ['France']
+
+  Category
+    Type: TEXT | Nulls: 0 (0.0%) | Unique: 4
+    Sample values: ['Cheapest_Market_Offer', 'National_Regulated_Base', 'Regulated_OffPeak', 'Regulated_Peak']
+
+  Price_EUR_per_kWh
+    Type: FLOAT | Nulls: 0 (0.0%) | Unique: 4
+    Sample values: ['0.1579', '0.1657', '0.1952', '0.2065']

@@ -1,0 +1,86 @@
+Data Quality Assessment: charging_station_ml.csv
+============================================================
+
+Delimiter: ','
+Columns: 17
+Headers: ['country_code', 'state_province', 'city', 'latitude', 'longitude', 'station_count', 'port_count', 'fast_station_count', 'fast_port_count', 'fast_station_share', 'fast_port_share', 'max_power_kw', 'median_power_kw', 'dc_fast_station_count', 'dc_ultra_station_count', 'has_fast_dc', 'has_ultra_dc']
+Rows: 58642
+File size: 4.7 MB
+
+Sample Rows (first 5):
+------------------------------------------------------------
+  Row 1: ['AD', 'Andorra la Vella', 'Andorra la Vella', '42.506879999999995', '1.527992', '2', '4', '0']...
+  Row 2: ['AD', 'Andorra la Vella', 'Santa Coloma', '42.496959', '1.500966', '1', '2', '0']...
+  Row 3: ['AD', 'Canillo', 'Canillo', '42.565901', '1.598916', '1', '2', '0']...
+  Row 4: ['AD', 'Canillo', 'Soldeu', '42.577997', '1.663842', '1', '2', '0']...
+  Row 5: ['AD', 'Encamp', 'Encamp', '42.535056999999995', '1.581334', '2', '3', '0']...
+
+Column Analysis:
+------------------------------------------------------------
+  country_code
+    Type: TEXT | Nulls: 0 (0.0%) | Unique: 121
+    Sample values: ['AD', 'AE', 'AF', 'AL', 'AM', 'AR']
+
+  state_province
+    Type: TEXT | Nulls: 0 (0.0%) | Unique: 5989
+    Sample values: ['(PA)', '(UD)', '-', '0', '29339', '3013']
+
+  city
+    Type: TEXT | Nulls: 0 (0.0%) | Unique: 10000+
+    Sample values: ['1', '100 Mile House', '10000 Prague 10 - Strašnice', '10a', '110 00 Praha', '110 00 Praha, Nové Mě...
+
+  latitude
+    Type: FLOAT | Nulls: 0 (0.0%) | Unique: 10000+
+    Sample values: ['-1.213136', '-1.299531', '-1.364118', '-1.458201', '-1.467031', '-10.130197']
+
+  longitude
+    Type: FLOAT | Nulls: 0 (0.0%) | Unique: 10000+
+    Sample values: ['-100.05622', '-100.175051', '-100.9284865', '-101.037279', '-101.2458926', '-101.2525085']
+
+  station_count
+    Type: INTEGER | Nulls: 0 (0.0%) | Unique: 230
+    Sample values: ['1', '10', '100', '101', '102', '103']
+
+  port_count
+    Type: INTEGER | Nulls: 0 (0.0%) | Unique: 342
+    Sample values: ['-4', '0', '1', '10', '100', '1005']
+
+  fast_station_count
+    Type: INTEGER | Nulls: 0 (0.0%) | Unique: 83
+    Sample values: ['0', '1', '10', '107', '11', '111']
+
+  fast_port_count
+    Type: INTEGER | Nulls: 0 (0.0%) | Unique: 160
+    Sample values: ['0', '1', '10', '100', '103', '104']
+
+  fast_station_share
+    Type: FLOAT | Nulls: 0 (0.0%) | Unique: 606
+    Sample values: ['0.0', '0.0017921146953405018', '0.0036363636363636364', '0.005813953488372093', '0.007575757575757...
+
+  fast_port_share
+    Type: FLOAT | Nulls: 4 (0.0%) | Unique: 1219
+    Sample values: ['', '-0.0', '0.0', '0.0017921146953405018', '0.003067484662576687', '0.005714285714285714']
+
+  max_power_kw
+    Type: FLOAT | Nulls: 1740 (3.0%) | Unique: 249
+    Sample values: ['', '0.0', '0.2', '0.3', '1.0', '1.1']
+
+  median_power_kw
+    Type: FLOAT | Nulls: 1740 (3.0%) | Unique: 589
+    Sample values: ['', '0.0', '0.2', '0.3', '1.0', '1.1']
+
+  dc_fast_station_count
+    Type: INTEGER | Nulls: 0 (0.0%) | Unique: 83
+    Sample values: ['0', '1', '10', '107', '11', '111']
+
+  dc_ultra_station_count
+    Type: INTEGER | Nulls: 0 (0.0%) | Unique: 40
+    Sample values: ['0', '1', '10', '11', '12', '13']
+
+  has_fast_dc
+    Type: INTEGER | Nulls: 0 (0.0%) | Unique: 2
+    Sample values: ['0', '1']
+
+  has_ultra_dc
+    Type: INTEGER | Nulls: 0 (0.0%) | Unique: 2
+    Sample values: ['0', '1']

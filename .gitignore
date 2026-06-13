@@ -1,0 +1,17 @@
+# Secrets — never commit
+.env
+.env.*
+!.env.example
+
+# Local tooling / machine state (Claude Code settings hold credentials)
+.claude/
+
+# macOS
+.DS_Store
+
+# Editors
+.vscode/
+.idea/
+
+# Node (if any tooling added later)
+node_modules/

@@ -1,0 +1,90 @@
+Data Quality Assessment: ember_yearly_electricity.csv
+============================================================
+
+Delimiter: ','
+Columns: 18
+Headers: ['Area', 'ISO 3 code', 'Year', 'Area type', 'Continent', 'Ember region', 'EU', 'OECD', 'G20', 'G7', 'ASEAN', 'Category', 'Subcategory', 'Variable', 'Unit', 'Value', 'YoY absolute change', 'YoY % change']
+Rows: 359796
+File size: 45.3 MB
+
+Sample Rows (first 5):
+------------------------------------------------------------
+  Row 1: ['Afghanistan', 'AFG', '2000', 'Country or economy', 'Asia', 'Asia', '0.0', '0.0']...
+  Row 2: ['Afghanistan', 'AFG', '2000', 'Country or economy', 'Asia', 'Asia', '0.0', '0.0']...
+  Row 3: ['Afghanistan', 'AFG', '2000', 'Country or economy', 'Asia', 'Asia', '0.0', '0.0']...
+  Row 4: ['Afghanistan', 'AFG', '2000', 'Country or economy', 'Asia', 'Asia', '0.0', '0.0']...
+  Row 5: ['Afghanistan', 'AFG', '2000', 'Country or economy', 'Asia', 'Asia', '0.0', '0.0']...
+
+Column Analysis:
+------------------------------------------------------------
+  Area
+    Type: TEXT | Nulls: 0 (0.0%) | Unique: 228
+    Sample values: ['ASEAN', 'Afghanistan', 'Africa', 'Albania', 'Algeria', 'American Samoa']
+
+  ISO 3 code
+    Type: TEXT | Nulls: 21582 (6.0%) | Unique: 216
+    Sample values: ['', 'ABW', 'AFG', 'AGO', 'ALB', 'ARE']
+
+  Year
+    Type: INTEGER | Nulls: 0 (0.0%) | Unique: 26
+    Sample values: ['2000', '2001', '2002', '2003', '2004', '2005']
+
+  Area type
+    Type: TEXT | Nulls: 0 (0.0%) | Unique: 2
+    Sample values: ['Country or economy', 'Region']
+
+  Continent
+    Type: TEXT | Nulls: 21582 (6.0%) | Unique: 7
+    Sample values: ['', 'Africa', 'Asia', 'Europe', 'North America', 'Oceania']
+
+  Ember region
+    Type: TEXT | Nulls: 21582 (6.0%) | Unique: 8
+    Sample values: ['', 'Africa', 'Asia', 'Europe', 'Latin America and Caribbean', 'Middle East']
+
+  EU
+    Type: FLOAT | Nulls: 21582 (6.0%) | Unique: 3
+    Sample values: ['', '0.0', '1.0']
+
+  OECD
+    Type: FLOAT | Nulls: 21582 (6.0%) | Unique: 3
+    Sample values: ['', '0.0', '1.0']
+
+  G20
+    Type: FLOAT | Nulls: 21582 (6.0%) | Unique: 3
+    Sample values: ['', '0.0', '1.0']
+
+  G7
+    Type: FLOAT | Nulls: 21582 (6.0%) | Unique: 3
+    Sample values: ['', '0.0', '1.0']
+
+  ASEAN
+    Type: FLOAT | Nulls: 21582 (6.0%) | Unique: 3
+    Sample values: ['', '0.0', '1.0']
+
+  Category
+    Type: TEXT | Nulls: 0 (0.0%) | Unique: 5
+    Sample values: ['Capacity', 'Electricity demand', 'Electricity generation', 'Electricity imports', 'Power sector em...
+
+  Subcategory
+    Type: TEXT | Nulls: 0 (0.0%) | Unique: 7
+    Sample values: ['Aggregate fuel', 'CO2 intensity', 'Demand', 'Demand per capita', 'Electricity imports', 'Fuel']
+
+  Variable
+    Type: TEXT | Nulls: 0 (0.0%) | Unique: 21
+    Sample values: ['Bioenergy', 'CO2 intensity', 'Clean', 'Coal', 'Demand', 'Demand per capita']
+
+  Unit
+    Type: TEXT | Nulls: 0 (0.0%) | Unique: 6
+    Sample values: ['%', 'GW', 'MWh', 'TWh', 'gCO2/kWh', 'mtCO2']
+
+  Value
+    Type: FLOAT | Nulls: 20329 (5.7%) | Unique: 10000+
+    Sample values: ['', '-0.01', '-0.02', '-0.03', '-0.04', '-0.05']
+
+  YoY absolute change
+    Type: FLOAT | Nulls: 112420 (31.2%) | Unique: 9649
+    Sample values: ['', '-0.01', '-0.02', '-0.03', '-0.04', '-0.05']
+
+  YoY % change
+    Type: FLOAT | Nulls: 194323 (54.0%) | Unique: 10000+
+    Sample values: ['', '-0.01', '-0.02', '-0.03', '-0.04', '-0.05']

@@ -1,0 +1,66 @@
+Data Quality Assessment: co2.csv
+============================================================
+
+Delimiter: ','
+Columns: 12
+Headers: ['Make', 'Model', 'Vehicle Class', 'Engine Size(L)', 'Cylinders', 'Transmission', 'Fuel Type', 'Fuel Consumption City (L/100 km)', 'Fuel Consumption Hwy (L/100 km)', 'Fuel Consumption Comb (L/100 km)', 'Fuel Consumption Comb (mpg)', 'CO2 Emissions(g/km)']
+Rows: 7385
+File size: 464.9 KB
+
+Sample Rows (first 5):
+------------------------------------------------------------
+  Row 1: ['ACURA', 'ILX', 'COMPACT', '2', '4', 'AS5', 'Z', '9.9']...
+  Row 2: ['ACURA', 'ILX', 'COMPACT', '2.4', '4', 'M6', 'Z', '11.2']...
+  Row 3: ['ACURA', 'ILX HYBRID', 'COMPACT', '1.5', '4', 'AV7', 'Z', '6']...
+  Row 4: ['ACURA', 'MDX 4WD', 'SUV - SMALL', '3.5', '6', 'AS6', 'Z', '12.7']...
+  Row 5: ['ACURA', 'RDX AWD', 'SUV - SMALL', '3.5', '6', 'AS6', 'Z', '12.1']...
+
+Column Analysis:
+------------------------------------------------------------
+  Make
+    Type: TEXT | Nulls: 0 (0.0%) | Unique: 42
+    Sample values: ['ACURA', 'ALFA ROMEO', 'ASTON MARTIN', 'AUDI', 'BENTLEY', 'BMW']
+
+  Model
+    Type: TEXT | Nulls: 0 (0.0%) | Unique: 2048
+    Sample values: ['124 SPIDER', '124 Spider', '1500', '1500 (MDS)', '1500 4X4', '1500 4X4 (MDS)']
+
+  Vehicle Class
+    Type: TEXT | Nulls: 0 (0.0%) | Unique: 16
+    Sample values: ['COMPACT', 'FULL-SIZE', 'MID-SIZE', 'MINICOMPACT', 'MINIVAN', 'PICKUP TRUCK - SMALL']
+
+  Engine Size(L)
+    Type: FLOAT | Nulls: 0 (0.0%) | Unique: 51
+    Sample values: ['0.9', '1', '1.2', '1.3', '1.4', '1.5']
+
+  Cylinders
+    Type: INTEGER | Nulls: 0 (0.0%) | Unique: 8
+    Sample values: ['10', '12', '16', '3', '4', '5']
+
+  Transmission
+    Type: TEXT | Nulls: 0 (0.0%) | Unique: 27
+    Sample values: ['A10', 'A4', 'A5', 'A6', 'A7', 'A8']
+
+  Fuel Type
+    Type: TEXT | Nulls: 0 (0.0%) | Unique: 5
+    Sample values: ['D', 'E', 'N', 'X', 'Z']
+
+  Fuel Consumption City (L/100 km)
+    Type: FLOAT | Nulls: 0 (0.0%) | Unique: 211
+    Sample values: ['10', '10.1', '10.2', '10.3', '10.4', '10.5']
+
+  Fuel Consumption Hwy (L/100 km)
+    Type: FLOAT | Nulls: 0 (0.0%) | Unique: 143
+    Sample values: ['10', '10.1', '10.2', '10.3', '10.4', '10.5']
+
+  Fuel Consumption Comb (L/100 km)
+    Type: FLOAT | Nulls: 0 (0.0%) | Unique: 181
+    Sample values: ['10', '10.1', '10.2', '10.3', '10.4', '10.5']
+
+  Fuel Consumption Comb (mpg)
+    Type: INTEGER | Nulls: 0 (0.0%) | Unique: 54
+    Sample values: ['11', '12', '13', '14', '15', '16']
+
+  CO2 Emissions(g/km)
+    Type: INTEGER | Nulls: 0 (0.0%) | Unique: 331
+    Sample values: ['102', '103', '104', '105', '106', '108']

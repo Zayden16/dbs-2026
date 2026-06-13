@@ -1,0 +1,28 @@
+Data Quality Assessment: fuel_prices.csv
+============================================================
+
+Delimiter: ','
+Columns: 3
+Headers: ['Country', 'Petrol_EUR_per_L', 'Diesel_EUR_per_L']
+Rows: 3
+File size: 0.1 KB
+
+Sample Rows (first 5):
+------------------------------------------------------------
+  Row 1: ['Switzerland', '1.67', '1.80']
+  Row 2: ['France', '1.79', '1.75']
+  Row 3: ['Germany', '1.85', '1.76']
+
+Column Analysis:
+------------------------------------------------------------
+  Country
+    Type: TEXT | Nulls: 0 (0.0%) | Unique: 3
+    Sample values: ['France', 'Germany', 'Switzerland']
+
+  Petrol_EUR_per_L
+    Type: FLOAT | Nulls: 0 (0.0%) | Unique: 3
+    Sample values: ['1.67', '1.79', '1.85']
+
+  Diesel_EUR_per_L
+    Type: FLOAT | Nulls: 0 (0.0%) | Unique: 3
+    Sample values: ['1.75', '1.76', '1.80']

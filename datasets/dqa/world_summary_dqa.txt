@@ -1,0 +1,66 @@
+Data Quality Assessment: world_summary.csv
+============================================================
+
+Delimiter: ','
+Columns: 12
+Headers: ['country_code', 'country', 'station_count', 'port_count', 'fast_station_count', 'fast_port_count', 'fast_station_share', 'fast_port_share', 'max_power_kw', 'median_power_kw', 'dc_fast_station_count', 'dc_ultra_station_count']
+Rows: 121
+File size: 8.5 KB
+
+Sample Rows (first 5):
+------------------------------------------------------------
+  Row 1: ['AD', 'Andorra', '96', '259', '6', '36', '0.0625', '0.138996138996139']...
+  Row 2: ['AE', 'United Arab Emirates', '131', '346', '23', '142', '0.17557251908396945', '0.41040462427745666']...
+  Row 3: ['AF', 'Afghanistan', '1', '1', '0', '0', '0.0', '0.0']...
+  Row 4: ['AL', 'Albania', '15', '16', '9', '9', '0.6', '0.5625']...
+  Row 5: ['AM', 'Armenia', '4', '6', '1', '1', '0.25', '0.16666666666666666']...
+
+Column Analysis:
+------------------------------------------------------------
+  country_code
+    Type: TEXT | Nulls: 0 (0.0%) | Unique: 121
+    Sample values: ['AD', 'AE', 'AF', 'AL', 'AM', 'AR']
+
+  country
+    Type: TEXT | Nulls: 0 (0.0%) | Unique: 121
+    Sample values: ['Afghanistan', 'Aland Islands', 'Albania', 'Andorra', 'Argentina', 'Armenia']
+
+  station_count
+    Type: INTEGER | Nulls: 0 (0.0%) | Unique: 85
+    Sample values: ['1', '10354', '109', '1188', '12', '1241']
+
+  port_count
+    Type: INTEGER | Nulls: 0 (0.0%) | Unique: 92
+    Sample values: ['1', '10', '1098', '11', '1116', '113']
+
+  fast_station_count
+    Type: INTEGER | Nulls: 0 (0.0%) | Unique: 73
+    Sample values: ['0', '1', '106', '1193', '12', '13']
+
+  fast_port_count
+    Type: INTEGER | Nulls: 0 (0.0%) | Unique: 80
+    Sample values: ['0', '1', '10', '1098', '11', '110']
+
+  fast_station_share
+    Type: FLOAT | Nulls: 0 (0.0%) | Unique: 86
+    Sample values: ['0.0', '0.02702702702702703', '0.04375231738969225', '0.04878048780487805', '0.056818181818181816',...
+
+  fast_port_share
+    Type: FLOAT | Nulls: 0 (0.0%) | Unique: 93
+    Sample values: ['0.0', '0.024390243902439025', '0.02654867256637168', '0.02702702702702703', '0.05555555555555555',...
+
+  max_power_kw
+    Type: FLOAT | Nulls: 4 (3.3%) | Unique: 35
+    Sample values: ['', '10.0', '100.0', '1000.0', '1000000.0', '11.0']
+
+  median_power_kw
+    Type: FLOAT | Nulls: 4 (3.3%) | Unique: 30
+    Sample values: ['', '10.0', '1000.0', '11.0', '120.0', '14.0']
+
+  dc_fast_station_count
+    Type: INTEGER | Nulls: 0 (0.0%) | Unique: 73
+    Sample values: ['0', '1', '106', '1193', '12', '13']
+
+  dc_ultra_station_count
+    Type: INTEGER | Nulls: 0 (0.0%) | Unique: 48
+    Sample values: ['0', '1', '10', '1083', '112', '113']

@@ -1,0 +1,62 @@
+Data Quality Assessment: charging_station.csv
+============================================================
+
+Delimiter: ','
+Columns: 11
+Headers: ['id', 'name', 'city', 'state_province', 'country_code', 'latitude', 'longitude', 'ports', 'power_kw', 'power_class', 'is_fast_dc']
+Rows: 242417
+File size: 23.2 MB
+
+Sample Rows (first 5):
+------------------------------------------------------------
+  Row 1: ['307660', 'Av. de Tarragona', 'Andorra', 'UNKNOWN', 'AD', '42.505254', '1.528861', '10']...
+  Row 2: ['301207', 'Parquing Costa Rodona', 'Encamp', 'UNKNOWN', 'AD', '42.537213', '1.727014', '10']...
+  Row 3: ['301206', 'Hotel Naudi', 'Unknown City', 'UNKNOWN', 'AD', '42.576811', '1.666061', '1']...
+  Row 4: ['301205', 'Hotel Piolets Soldeu Centre', 'Unknown City', 'UNKNOWN', 'AD', '42.576466', '1.667317', '1']...
+  Row 5: ['301204', 'Hotel Serras', 'Unknown City', 'UNKNOWN', 'AD', '42.579458', '1.659215', '3']...
+
+Column Analysis:
+------------------------------------------------------------
+  id
+    Type: INTEGER | Nulls: 0 (0.0%) | Unique: 10000+
+    Sample values: ['100004', '100010', '100169', '100220', '100221', '100222']
+
+  name
+    Type: TEXT | Nulls: 0 (0.0%) | Unique: 10000+
+    Sample values: ['"Das West" EnerCharge (parking level -1)', "'s-Gravenwezelsteenweg - Wijnegemsteenweg", "'t Waaiho...
+
+  city
+    Type: TEXT | Nulls: 0 (0.0%) | Unique: 10000+
+    Sample values: ['1', '100 Mile House', '10000 Prague 10 - Strašnice', '10a', '110 00 Praha', '110 00 Praha, Nové Mě...
+
+  state_province
+    Type: TEXT | Nulls: 0 (0.0%) | Unique: 5989
+    Sample values: ['(PA)', '(UD)', '-', '0', '29339', '3013']
+
+  country_code
+    Type: TEXT | Nulls: 0 (0.0%) | Unique: 121
+    Sample values: ['AD', 'AE', 'AF', 'AL', 'AM', 'AR']
+
+  latitude
+    Type: FLOAT | Nulls: 0 (0.0%) | Unique: 10000+
+    Sample values: ['-1.213136', '-1.299531', '-1.364118', '-1.442776', '-1.467031', '-1.473626']
+
+  longitude
+    Type: FLOAT | Nulls: 0 (0.0%) | Unique: 10000+
+    Sample values: ['-100.051702', '-100.060607', '-100.06429', '-100.925965', '-100.930344', '-101.24137']
+
+  ports
+    Type: INTEGER | Nulls: 0 (0.0%) | Unique: 113
+    Sample values: ['-4', '0', '1', '10', '100', '102']
+
+  power_kw
+    Type: FLOAT | Nulls: 4660 (1.9%) | Unique: 314
+    Sample values: ['', '0.0', '0.2', '0.3', '1.0', '1.1']
+
+  power_class
+    Type: TEXT | Nulls: 0 (0.0%) | Unique: 6
+    Sample values: ['AC_HIGH_(22-49kW)', 'AC_L1_(<7.5kW)', 'AC_L2_(7.5-21kW)', 'DC_FAST_(50-149kW)', 'DC_ULTRA_(>=150kW...
+
+  is_fast_dc
+    Type: TEXT | Nulls: 0 (0.0%) | Unique: 2
+    Sample values: ['False', 'True']

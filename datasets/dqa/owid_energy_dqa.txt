@@ -1,0 +1,538 @@
+Data Quality Assessment: owid_energy.csv
+============================================================
+
+Delimiter: ','
+Columns: 130
+Headers: ['country', 'year', 'iso_code', 'population', 'gdp', 'biofuel_cons_change_pct', 'biofuel_cons_change_twh', 'biofuel_cons_per_capita', 'biofuel_consumption', 'biofuel_elec_per_capita', 'biofuel_electricity', 'biofuel_share_elec', 'biofuel_share_energy', 'carbon_intensity_elec', 'coal_cons_change_pct', 'coal_cons_change_twh', 'coal_cons_per_capita', 'coal_consumption', 'coal_elec_per_capita', 'coal_electricity', 'coal_prod_change_pct', 'coal_prod_change_twh', 'coal_prod_per_capita', 'coal_production', 'coal_share_elec', 'coal_share_energy', 'electricity_demand', 'electricity_demand_per_capita', 'electricity_generation', 'electricity_share_energy', 'energy_cons_change_pct', 'energy_cons_change_twh', 'energy_per_capita', 'energy_per_gdp', 'fossil_cons_change_pct', 'fossil_cons_change_twh', 'fossil_elec_per_capita', 'fossil_electricity', 'fossil_energy_per_capita', 'fossil_fuel_consumption', 'fossil_share_elec', 'fossil_share_energy', 'gas_cons_change_pct', 'gas_cons_change_twh', 'gas_consumption', 'gas_elec_per_capita', 'gas_electricity', 'gas_energy_per_capita', 'gas_prod_change_pct', 'gas_prod_change_twh', 'gas_prod_per_capita', 'gas_production', 'gas_share_elec', 'gas_share_energy', 'greenhouse_gas_emissions', 'hydro_cons_change_pct', 'hydro_cons_change_twh', 'hydro_consumption', 'hydro_elec_per_capita', 'hydro_electricity', 'hydro_energy_per_capita', 'hydro_share_elec', 'hydro_share_energy', 'low_carbon_cons_change_pct', 'low_carbon_cons_change_twh', 'low_carbon_consumption', 'low_carbon_elec_per_capita', 'low_carbon_electricity', 'low_carbon_energy_per_capita', 'low_carbon_share_elec', 'low_carbon_share_energy', 'net_elec_imports', 'net_elec_imports_share_demand', 'nuclear_cons_change_pct', 'nuclear_cons_change_twh', 'nuclear_consumption', 'nuclear_elec_per_capita', 'nuclear_electricity', 'nuclear_energy_per_capita', 'nuclear_share_elec', 'nuclear_share_energy', 'oil_cons_change_pct', 'oil_cons_change_twh', 'oil_consumption', 'oil_elec_per_capita', 'oil_electricity', 'oil_energy_per_capita', 'oil_prod_change_pct', 'oil_prod_change_twh', 'oil_prod_per_capita', 'oil_production', 'oil_share_elec', 'oil_share_energy', 'other_renewable_consumption', 'other_renewable_electricity', 'other_renewable_exc_biofuel_electricity', 'other_renewables_cons_change_pct', 'other_renewables_cons_change_twh', 'other_renewables_elec_per_capita', 'other_renewables_elec_per_capita_exc_biofuel', 'other_renewables_energy_per_capita', 'other_renewables_share_elec', 'other_renewables_share_elec_exc_biofuel', 'other_renewables_share_energy', 'per_capita_electricity', 'primary_energy_consumption', 'renewables_cons_change_pct', 'renewables_cons_change_twh', 'renewables_consumption', 'renewables_elec_per_capita', 'renewables_electricity', 'renewables_energy_per_capita', 'renewables_share_elec', 'renewables_share_energy', 'solar_cons_change_pct', 'solar_cons_change_twh', 'solar_consumption', 'solar_elec_per_capita', 'solar_electricity', 'solar_energy_per_capita', 'solar_share_elec', 'solar_share_energy', 'wind_cons_change_pct', 'wind_cons_change_twh', 'wind_consumption', 'wind_elec_per_capita', 'wind_electricity', 'wind_energy_per_capita', 'wind_share_elec', 'wind_share_energy']
+Rows: 23232
+File size: 8.7 MB
+
+Sample Rows (first 5):
+------------------------------------------------------------
+  Row 1: ['ASEAN (Ember)', '2000', '', '', '', '', '', '']...
+  Row 2: ['ASEAN (Ember)', '2001', '', '', '', '', '', '']...
+  Row 3: ['ASEAN (Ember)', '2002', '', '', '', '', '', '']...
+  Row 4: ['ASEAN (Ember)', '2003', '', '', '', '', '', '']...
+  Row 5: ['ASEAN (Ember)', '2004', '', '', '', '', '', '']...
+
+Column Analysis:
+------------------------------------------------------------
+  country
+    Type: TEXT | Nulls: 0 (0.0%) | Unique: 314
+    Sample values: ['ASEAN (Ember)', 'Afghanistan', 'Africa', 'Africa (EI)', 'Africa (EIA)', 'Africa (Ember)']
+
+  year
+    Type: INTEGER | Nulls: 0 (0.0%) | Unique: 126
+    Sample values: ['1900', '1901', '1902', '1903', '1904', '1905']
+
+  iso_code
+    Type: TEXT | Nulls: 6098 (26.2%) | Unique: 221
+    Sample values: ['', 'ABW', 'AFG', 'AGO', 'ALB', 'ANT']
+
+  population
+    Type: INTEGER | Nulls: 4472 (19.2%) | Unique: 10000+
+    Sample values: ['', '10000528', '10001381', '100028', '10004289', '100045']
+
+  gdp
+    Type: INTEGER | Nulls: 11452 (49.3%) | Unique: 10000+
+    Sample values: ['', '10000324502', '100014216000', '10004358000', '10008766582', '100109709187']
+
+  biofuel_cons_change_pct
+    Type: FLOAT | Nulls: 21162 (91.1%) | Unique: 1765
+    Sample values: ['', '-0.050', '-0.065', '-0.116', '-0.120', '-0.128']
+
+  biofuel_cons_change_twh
+    Type: FLOAT | Nulls: 15329 (66.0%) | Unique: 1351
+    Sample values: ['', '-0.000', '-0.001', '-0.002', '-0.003', '-0.004']
+
+  biofuel_cons_per_capita
+    Type: FLOAT | Nulls: 16894 (72.7%) | Unique: 1610
+    Sample values: ['', '0.000', '0.017', '0.018', '0.020', '0.021']
+
+  biofuel_consumption
+    Type: FLOAT | Nulls: 15175 (65.3%) | Unique: 1664
+    Sample values: ['', '0.000', '0.001', '0.002', '0.003', '0.004']
+
+  biofuel_elec_per_capita
+    Type: FLOAT | Nulls: 17436 (75.1%) | Unique: 2999
+    Sample values: ['', '0.000', '0.057', '0.058', '0.060', '0.062']
+
+  biofuel_electricity
+    Type: FLOAT | Nulls: 17125 (73.7%) | Unique: 1182
+    Sample values: ['', '0.000', '0.010', '0.020', '0.030', '0.040']
+
+  biofuel_share_elec
+    Type: FLOAT | Nulls: 17150 (73.8%) | Unique: 2331
+    Sample values: ['', '0.000', '0.003', '0.004', '0.005', '0.006']
+
+  biofuel_share_energy
+    Type: FLOAT | Nulls: 16853 (72.5%) | Unique: 1081
+    Sample values: ['', '0.000', '0.001', '0.002', '0.003', '0.004']
+
+  carbon_intensity_elec
+    Type: FLOAT | Nulls: 17126 (73.7%) | Unique: 4745
+    Sample values: ['', '0.000', '100.000', '100.580', '1000.000', '101.560']
+
+  coal_cons_change_pct
+    Type: FLOAT | Nulls: 17405 (74.9%) | Unique: 5273
+    Sample values: ['', '-0.000', '-0.001', '-0.007', '-0.014', '-0.017']
+
+  coal_cons_change_twh
+    Type: FLOAT | Nulls: 16939 (72.9%) | Unique: 4653
+    Sample values: ['', '-0.000', '-0.001', '-0.002', '-0.003', '-0.004']
+
+  coal_cons_per_capita
+    Type: FLOAT | Nulls: 18087 (77.9%) | Unique: 4718
+    Sample values: ['', '0.000', '0.022', '0.030', '0.036', '0.052']
+
+  coal_consumption
+    Type: FLOAT | Nulls: 16827 (72.4%) | Unique: 5426
+    Sample values: ['', '0.000', '0.001', '0.002', '0.003', '0.004']
+
+  coal_elec_per_capita
+    Type: FLOAT | Nulls: 16934 (72.9%) | Unique: 3097
+    Sample values: ['', '0.000', '0.194', '0.289', '0.452', '0.470']
+
+  coal_electricity
+    Type: FLOAT | Nulls: 16263 (70.0%) | Unique: 2914
+    Sample values: ['', '0.000', '0.010', '0.020', '0.030', '0.040']
+
+  coal_prod_change_pct
+    Type: FLOAT | Nulls: 13310 (57.3%) | Unique: 7909
+    Sample values: ['', '-0.002', '-0.006', '-0.008', '-0.011', '-0.012']
+
+  coal_prod_change_twh
+    Type: FLOAT | Nulls: 6670 (28.7%) | Unique: 6913
+    Sample values: ['', '-0.000', '-0.001', '-0.002', '-0.003', '-0.004']
+
+  coal_prod_per_capita
+    Type: FLOAT | Nulls: 8424 (36.3%) | Unique: 8187
+    Sample values: ['', '0.000', '0.030', '0.122', '0.133', '0.145']
+
+  coal_production
+    Type: FLOAT | Nulls: 6410 (27.6%) | Unique: 8230
+    Sample values: ['', '0.000', '0.001', '0.002', '0.003', '0.004']
+
+  coal_share_elec
+    Type: FLOAT | Nulls: 16288 (70.1%) | Unique: 3549
+    Sample values: ['', '0.000', '0.019', '0.020', '0.025', '0.026']
+
+  coal_share_energy
+    Type: FLOAT | Nulls: 16853 (72.5%) | Unique: 5215
+    Sample values: ['', '0.000', '0.001', '0.002', '0.003', '0.004']
+
+  electricity_demand
+    Type: FLOAT | Nulls: 17083 (73.5%) | Unique: 3766
+    Sample values: ['', '0.000', '0.010', '0.020', '0.030', '0.040']
+
+  electricity_demand_per_capita
+    Type: FLOAT | Nulls: 17394 (74.9%) | Unique: 5813
+    Sample values: ['', '0.000', '10.179', '10.436', '10.573', '10.829']
+
+  electricity_generation
+    Type: FLOAT | Nulls: 15548 (66.9%) | Unique: 5219
+    Sample values: ['', '0.000', '0.010', '0.020', '0.030', '0.040']
+
+  electricity_share_energy
+    Type: FLOAT | Nulls: 19151 (82.4%) | Unique: 3648
+    Sample values: ['', '1.040', '1.085', '1.131', '1.208', '1.295']
+
+  energy_cons_change_pct
+    Type: FLOAT | Nulls: 10487 (45.1%) | Unique: 9489
+    Sample values: ['', '-0.000', '-0.001', '-0.002', '-0.003', '-0.004']
+
+  energy_cons_change_twh
+    Type: FLOAT | Nulls: 10254 (44.1%) | Unique: 9281
+    Sample values: ['', '-0.000', '-0.001', '-0.002', '-0.003', '-0.004']
+
+  energy_per_capita
+    Type: FLOAT | Nulls: 12146 (52.3%) | Unique: 10000+
+    Sample values: ['', '0.000', '100.717', '10003.666', '100058.656', '10010.844']
+
+  energy_per_gdp
+    Type: FLOAT | Nulls: 15350 (66.1%) | Unique: 3266
+    Sample values: ['', '0.000', '0.078', '0.082', '0.084', '0.086']
+
+  fossil_cons_change_pct
+    Type: FLOAT | Nulls: 16965 (73.0%) | Unique: 5322
+    Sample values: ['', '-0.002', '-0.004', '-0.006', '-0.009', '-0.015']
+
+  fossil_cons_change_twh
+    Type: FLOAT | Nulls: 16939 (72.9%) | Unique: 5943
+    Sample values: ['', '-0.009', '-0.010', '-0.013', '-0.029', '-0.033']
+
+  fossil_elec_per_capita
+    Type: FLOAT | Nulls: 16922 (72.8%) | Unique: 6102
+    Sample values: ['', '0.000', '0.084', '0.086', '0.102', '0.104']
+
+  fossil_electricity
+    Type: FLOAT | Nulls: 16251 (70.0%) | Unique: 3973
+    Sample values: ['', '0.000', '0.010', '0.020', '0.030', '0.040']
+
+  fossil_energy_per_capita
+    Type: FLOAT | Nulls: 18087 (77.9%) | Unique: 5140
+    Sample values: ['', '0.000', '10020.435', '100221.547', '100291.750', '10062.375']
+
+  fossil_fuel_consumption
+    Type: FLOAT | Nulls: 16827 (72.4%) | Unique: 6292
+    Sample values: ['', '0.000', '0.097', '0.122', '0.541', '0.652']
+
+  fossil_share_elec
+    Type: FLOAT | Nulls: 16276 (70.1%) | Unique: 5129
+    Sample values: ['', '0.000', '0.018', '0.060', '0.063', '0.064']
+
+  fossil_share_energy
+    Type: FLOAT | Nulls: 16853 (72.5%) | Unique: 5307
+    Sample values: ['', '100.000', '13.874', '15.506', '16.301', '16.680']
+
+  gas_cons_change_pct
+    Type: FLOAT | Nulls: 17589 (75.7%) | Unique: 5070
+    Sample values: ['', '-0.001', '-0.009', '-0.011', '-0.018', '-0.022']
+
+  gas_cons_change_twh
+    Type: FLOAT | Nulls: 16939 (72.9%) | Unique: 5036
+    Sample values: ['', '-0.000', '-0.001', '-0.002', '-0.003', '-0.005']
+
+  gas_consumption
+    Type: FLOAT | Nulls: 16827 (72.4%) | Unique: 5519
+    Sample values: ['', '0.000', '0.001', '0.002', '0.003', '0.004']
+
+  gas_elec_per_capita
+    Type: FLOAT | Nulls: 17050 (73.4%) | Unique: 3752
+    Sample values: ['', '0.000', '0.035', '0.056', '0.088', '0.092']
+
+  gas_electricity
+    Type: FLOAT | Nulls: 16379 (70.5%) | Unique: 3241
+    Sample values: ['', '0.000', '0.004', '0.005', '0.006', '0.010']
+
+  gas_energy_per_capita
+    Type: FLOAT | Nulls: 18087 (77.9%) | Unique: 4625
+    Sample values: ['', '0.000', '0.407', '0.708', '0.723', '0.766']
+
+  gas_prod_change_pct
+    Type: FLOAT | Nulls: 15129 (65.1%) | Unique: 6395
+    Sample values: ['', '-0.001', '-0.010', '-0.014', '-0.019', '-0.025']
+
+  gas_prod_change_twh
+    Type: FLOAT | Nulls: 6242 (26.9%) | Unique: 5906
+    Sample values: ['', '-0.000', '-0.001', '-0.002', '-0.003', '-0.004']
+
+  gas_prod_per_capita
+    Type: FLOAT | Nulls: 8204 (35.3%) | Unique: 6463
+    Sample values: ['', '0.000', '0.056', '0.073', '0.107', '0.209']
+
+  gas_production
+    Type: FLOAT | Nulls: 5981 (25.7%) | Unique: 7027
+    Sample values: ['', '0.000', '0.010', '0.011', '0.012', '0.014']
+
+  gas_share_elec
+    Type: FLOAT | Nulls: 16402 (70.6%) | Unique: 4060
+    Sample values: ['', '0.000', '0.002', '0.004', '0.008', '0.023']
+
+  gas_share_energy
+    Type: FLOAT | Nulls: 16853 (72.5%) | Unique: 5321
+    Sample values: ['', '0.000', '0.001', '0.002', '0.005', '0.006']
+
+  greenhouse_gas_emissions
+    Type: FLOAT | Nulls: 17470 (75.2%) | Unique: 2808
+    Sample values: ['', '0.000', '0.010', '0.020', '0.030', '0.040']
+
+  hydro_cons_change_pct
+    Type: FLOAT | Nulls: 17546 (75.5%) | Unique: 5174
+    Sample values: ['', '-0.010', '-0.015', '-0.028', '-0.033', '-0.039']
+
+  hydro_cons_change_twh
+    Type: FLOAT | Nulls: 16939 (72.9%) | Unique: 4528
+    Sample values: ['', '-0.000', '-0.001', '-0.002', '-0.003', '-0.004']
+
+  hydro_consumption
+    Type: FLOAT | Nulls: 16827 (72.4%) | Unique: 5257
+    Sample values: ['', '0.000', '0.003', '0.006', '0.008', '0.009']
+
+  hydro_elec_per_capita
+    Type: FLOAT | Nulls: 14946 (64.3%) | Unique: 6512
+    Sample values: ['', '0.000', '0.068', '0.135', '0.205', '0.206']
+
+  hydro_electricity
+    Type: FLOAT | Nulls: 13855 (59.6%) | Unique: 4940
+    Sample values: ['', '0.000', '0.001', '0.002', '0.003', '0.004']
+
+  hydro_energy_per_capita
+    Type: FLOAT | Nulls: 18087 (77.9%) | Unique: 4544
+    Sample values: ['', '0.000', '0.189', '0.375', '0.512', '0.570']
+
+  hydro_share_elec
+    Type: FLOAT | Nulls: 15680 (67.5%) | Unique: 5264
+    Sample values: ['', '0.000', '0.001', '0.003', '0.004', '0.005']
+
+  hydro_share_energy
+    Type: FLOAT | Nulls: 16853 (72.5%) | Unique: 4704
+    Sample values: ['', '0.000', '0.001', '0.002', '0.003', '0.004']
+
+  low_carbon_cons_change_pct
+    Type: FLOAT | Nulls: 17330 (74.6%) | Unique: 5277
+    Sample values: ['', '-0.011', '-0.012', '-0.013', '-0.028', '-0.032']
+
+  low_carbon_cons_change_twh
+    Type: FLOAT | Nulls: 16939 (72.9%) | Unique: 4870
+    Sample values: ['', '-0.000', '-0.001', '-0.002', '-0.003', '-0.004']
+
+  low_carbon_consumption
+    Type: FLOAT | Nulls: 16827 (72.4%) | Unique: 5609
+    Sample values: ['', '0.000', '0.002', '0.003', '0.004', '0.006']
+
+  low_carbon_elec_per_capita
+    Type: FLOAT | Nulls: 14852 (63.9%) | Unique: 7069
+    Sample values: ['', '0.000', '0.253', '0.331', '0.383', '0.451']
+
+  low_carbon_electricity
+    Type: FLOAT | Nulls: 13761 (59.2%) | Unique: 5448
+    Sample values: ['', '0.000', '0.001', '0.002', '0.003', '0.004']
+
+  low_carbon_energy_per_capita
+    Type: FLOAT | Nulls: 18087 (77.9%) | Unique: 4771
+    Sample values: ['', '0.000', '0.066', '0.069', '0.133', '0.268']
+
+  low_carbon_share_elec
+    Type: FLOAT | Nulls: 15586 (67.1%) | Unique: 5676
+    Sample values: ['', '0.000', '0.004', '0.011', '0.012', '0.013']
+
+  low_carbon_share_energy
+    Type: FLOAT | Nulls: 16853 (72.5%) | Unique: 5308
+    Sample values: ['', '0.000', '0.001', '0.002', '0.003', '0.004']
+
+  net_elec_imports
+    Type: FLOAT | Nulls: 17393 (74.9%) | Unique: 1542
+    Sample values: ['', '-0.010', '-0.020', '-0.030', '-0.040', '-0.050']
+
+  net_elec_imports_share_demand
+    Type: FLOAT | Nulls: 17416 (75.0%) | Unique: 3175
+    Sample values: ['', '-0.000', '-0.001', '-0.002', '-0.003', '-0.004']
+
+  nuclear_cons_change_pct
+    Type: FLOAT | Nulls: 20653 (88.9%) | Unique: 2254
+    Sample values: ['', '-0.008', '-0.012', '-0.020', '-0.027', '-0.036']
+
+  nuclear_cons_change_twh
+    Type: FLOAT | Nulls: 15515 (66.8%) | Unique: 2236
+    Sample values: ['', '-0.003', '-0.004', '-0.006', '-0.008', '-0.012']
+
+  nuclear_consumption
+    Type: FLOAT | Nulls: 15373 (66.2%) | Unique: 2334
+    Sample values: ['', '0.000', '0.008', '0.017', '0.031', '0.033']
+
+  nuclear_elec_per_capita
+    Type: FLOAT | Nulls: 14260 (61.4%) | Unique: 2127
+    Sample values: ['', '0.000', '0.013', '0.248', '0.301', '0.317']
+
+  nuclear_electricity
+    Type: FLOAT | Nulls: 13169 (56.7%) | Unique: 2453
+    Sample values: ['', '0.000', '0.003', '0.006', '0.011', '0.012']
+
+  nuclear_energy_per_capita
+    Type: FLOAT | Nulls: 16647 (71.7%) | Unique: 2104
+    Sample values: ['', '0.000', '0.037', '0.688', '0.836', '0.880']
+
+  nuclear_share_elec
+    Type: FLOAT | Nulls: 15677 (67.5%) | Unique: 2073
+    Sample values: ['', '0.000', '0.012', '0.021', '0.047', '0.071']
+
+  nuclear_share_energy
+    Type: FLOAT | Nulls: 16853 (72.5%) | Unique: 2284
+    Sample values: ['', '0.000', '0.001', '0.002', '0.003', '0.004']
+
+  oil_cons_change_pct
+    Type: FLOAT | Nulls: 16965 (73.0%) | Unique: 5408
+    Sample values: ['', '-0.000', '-0.002', '-0.006', '-0.010', '-0.011']
+
+  oil_cons_change_twh
+    Type: FLOAT | Nulls: 16939 (72.9%) | Unique: 5843
+    Sample values: ['', '-0.001', '-0.002', '-0.004', '-0.009', '-0.010']
+
+  oil_consumption
+    Type: FLOAT | Nulls: 16827 (72.4%) | Unique: 6262
+    Sample values: ['', '0.000', '0.097', '0.122', '0.541', '0.572']
+
+  oil_elec_per_capita
+    Type: FLOAT | Nulls: 16983 (73.1%) | Unique: 5709
+    Sample values: ['', '0.000', '0.084', '0.086', '0.102', '0.104']
+
+  oil_electricity
+    Type: FLOAT | Nulls: 16312 (70.2%) | Unique: 2620
+    Sample values: ['', '0.000', '0.001', '0.002', '0.003', '0.010']
+
+  oil_energy_per_capita
+    Type: FLOAT | Nulls: 18087 (77.9%) | Unique: 5141
+    Sample values: ['', '0.000', '10001.980', '1001.145', '10013.719', '10018.011']
+
+  oil_prod_change_pct
+    Type: FLOAT | Nulls: 13050 (56.2%) | Unique: 8015
+    Sample values: ['', '-0.000', '-0.001', '-0.002', '-0.004', '-0.006']
+
+  oil_prod_change_twh
+    Type: FLOAT | Nulls: 5503 (23.7%) | Unique: 7053
+    Sample values: ['', '-0.000', '-0.001', '-0.002', '-0.003', '-0.004']
+
+  oil_prod_per_capita
+    Type: FLOAT | Nulls: 7658 (33.0%) | Unique: 8056
+    Sample values: ['', '0.000', '0.049', '0.073', '0.097', '0.241']
+
+  oil_production
+    Type: FLOAT | Nulls: 5240 (22.6%) | Unique: 8393
+    Sample values: ['', '0.000', '0.003', '0.004', '0.006', '0.009']
+
+  oil_share_elec
+    Type: FLOAT | Nulls: 16337 (70.3%) | Unique: 4622
+    Sample values: ['', '0.000', '0.007', '0.008', '0.009', '0.012']
+
+  oil_share_energy
+    Type: FLOAT | Nulls: 16853 (72.5%) | Unique: 5956
+    Sample values: ['', '10.045', '10.090', '10.116', '10.158', '10.195']
+
+  other_renewable_consumption
+    Type: FLOAT | Nulls: 16827 (72.4%) | Unique: 3159
+    Sample values: ['', '0.000', '0.001', '0.002', '0.003', '0.004']
+
+  other_renewable_electricity
+    Type: FLOAT | Nulls: 13792 (59.4%) | Unique: 2568
+    Sample values: ['', '0.000', '0.001', '0.002', '0.003', '0.004']
+
+  other_renewable_exc_biofuel_electricity
+    Type: FLOAT | Nulls: 17700 (76.2%) | Unique: 631
+    Sample values: ['', '0.000', '0.010', '0.020', '0.030', '0.040']
+
+  other_renewables_cons_change_pct
+    Type: FLOAT | Nulls: 19244 (82.8%) | Unique: 3531
+    Sample values: ['', '-0.004', '-0.022', '-0.029', '-0.035', '-0.040']
+
+  other_renewables_cons_change_twh
+    Type: FLOAT | Nulls: 16939 (72.9%) | Unique: 2272
+    Sample values: ['', '-0.000', '-0.001', '-0.002', '-0.003', '-0.004']
+
+  other_renewables_elec_per_capita
+    Type: FLOAT | Nulls: 14883 (64.1%) | Unique: 4101
+    Sample values: ['', '0.000', '0.023', '0.043', '0.053', '0.055']
+
+  other_renewables_elec_per_capita_exc_biofuel
+    Type: FLOAT | Nulls: 18011 (77.5%) | Unique: 796
+    Sample values: ['', '0.000', '0.018', '0.019', '0.020', '0.038']
+
+  other_renewables_energy_per_capita
+    Type: FLOAT | Nulls: 18087 (77.9%) | Unique: 3157
+    Sample values: ['', '0.000', '0.003', '0.007', '0.019', '0.057']
+
+  other_renewables_share_elec
+    Type: FLOAT | Nulls: 15617 (67.2%) | Unique: 2943
+    Sample values: ['', '0.000', '0.001', '0.002', '0.003', '0.004']
+
+  other_renewables_share_elec_exc_biofuel
+    Type: FLOAT | Nulls: 17725 (76.3%) | Unique: 750
+    Sample values: ['', '0.000', '0.003', '0.004', '0.005', '0.007']
+
+  other_renewables_share_energy
+    Type: FLOAT | Nulls: 16853 (72.5%) | Unique: 1848
+    Sample values: ['', '0.000', '0.001', '0.002', '0.003', '0.004']
+
+  per_capita_electricity
+    Type: FLOAT | Nulls: 16379 (70.5%) | Unique: 6825
+    Sample values: ['', '0.000', '10.110', '10.179', '10.436', '10.573']
+
+  primary_energy_consumption
+    Type: FLOAT | Nulls: 9977 (42.9%) | Unique: 10000+
+    Sample values: ['', '0.000', '0.012', '0.013', '0.014', '0.024']
+
+  renewables_cons_change_pct
+    Type: FLOAT | Nulls: 17337 (74.6%) | Unique: 5308
+    Sample values: ['', '-0.012', '-0.022', '-0.028', '-0.031', '-0.034']
+
+  renewables_cons_change_twh
+    Type: FLOAT | Nulls: 16939 (72.9%) | Unique: 4730
+    Sample values: ['', '-0.000', '-0.001', '-0.002', '-0.003', '-0.004']
+
+  renewables_consumption
+    Type: FLOAT | Nulls: 16827 (72.4%) | Unique: 5555
+    Sample values: ['', '0.000', '0.002', '0.003', '0.004', '0.006']
+
+  renewables_elec_per_capita
+    Type: FLOAT | Nulls: 14852 (63.9%) | Unique: 7056
+    Sample values: ['', '0.000', '0.253', '0.331', '0.383', '0.451']
+
+  renewables_electricity
+    Type: FLOAT | Nulls: 13761 (59.2%) | Unique: 5223
+    Sample values: ['', '0.000', '0.001', '0.002', '0.003', '0.004']
+
+  renewables_energy_per_capita
+    Type: FLOAT | Nulls: 18087 (77.9%) | Unique: 4763
+    Sample values: ['', '0.000', '0.066', '0.069', '0.133', '0.268']
+
+  renewables_share_elec
+    Type: FLOAT | Nulls: 15586 (67.1%) | Unique: 5619
+    Sample values: ['', '0.000', '0.004', '0.011', '0.012', '0.013']
+
+  renewables_share_energy
+    Type: FLOAT | Nulls: 16853 (72.5%) | Unique: 5099
+    Sample values: ['', '0.000', '0.001', '0.002', '0.003', '0.004']
+
+  solar_cons_change_pct
+    Type: FLOAT | Nulls: 20717 (89.2%) | Unique: 2123
+    Sample values: ['', '-0.014', '-0.132', '-0.144', '-0.208', '-0.225']
+
+  solar_cons_change_twh
+    Type: FLOAT | Nulls: 16939 (72.9%) | Unique: 1191
+    Sample values: ['', '-0.000', '-0.001', '-0.002', '-0.003', '-0.004']
+
+  solar_consumption
+    Type: FLOAT | Nulls: 16827 (72.4%) | Unique: 1474
+    Sample values: ['', '0.000', '0.001', '0.002', '0.003', '0.004']
+
+  solar_elec_per_capita
+    Type: FLOAT | Nulls: 14838 (63.9%) | Unique: 2335
+    Sample values: ['', '0.000', '0.001', '0.002', '0.003', '0.004']
+
+  solar_electricity
+    Type: FLOAT | Nulls: 13747 (59.2%) | Unique: 1112
+    Sample values: ['', '0.000', '0.001', '0.002', '0.003', '0.004']
+
+  solar_energy_per_capita
+    Type: FLOAT | Nulls: 18087 (77.9%) | Unique: 1806
+    Sample values: ['', '0.000', '0.001', '0.002', '0.003', '0.004']
+
+  solar_share_elec
+    Type: FLOAT | Nulls: 15592 (67.1%) | Unique: 1658
+    Sample values: ['', '0.000', '0.001', '0.002', '0.003', '0.004']
+
+  solar_share_energy
+    Type: FLOAT | Nulls: 16853 (72.5%) | Unique: 913
+    Sample values: ['', '0.000', '0.001', '0.002', '0.003', '0.004']
+
+  wind_cons_change_pct
+    Type: FLOAT | Nulls: 20434 (88.0%) | Unique: 2358
+    Sample values: ['', '-0.001', '-0.066', '-0.086', '-0.136', '-0.144']
+
+  wind_cons_change_twh
+    Type: FLOAT | Nulls: 16939 (72.9%) | Unique: 1622
+    Sample values: ['', '-0.000', '-0.001', '-0.002', '-0.003', '-0.004']
+
+  wind_consumption
+    Type: FLOAT | Nulls: 16827 (72.4%) | Unique: 1953
+    Sample values: ['', '0.000', '0.001', '0.002', '0.003', '0.004']
+
+  wind_elec_per_capita
+    Type: FLOAT | Nulls: 14995 (64.5%) | Unique: 2491
+    Sample values: ['', '0.000', '0.001', '0.002', '0.003', '0.004']
+
+  wind_electricity
+    Type: FLOAT | Nulls: 13904 (59.8%) | Unique: 1536
+    Sample values: ['', '0.000', '0.001', '0.002', '0.003', '0.004']
+
+  wind_energy_per_capita
+    Type: FLOAT | Nulls: 18087 (77.9%) | Unique: 2139
+    Sample values: ['', '0.000', '0.001', '0.002', '0.003', '0.004']
+
+  wind_share_elec
+    Type: FLOAT | Nulls: 15749 (67.8%) | Unique: 2024
+    Sample values: ['', '0.000', '0.001', '0.002', '0.003', '0.004']
+
+  wind_share_energy
+    Type: FLOAT | Nulls: 16853 (72.5%) | Unique: 1267
+    Sample values: ['', '0.000', '0.001', '0.002', '0.003', '0.004']

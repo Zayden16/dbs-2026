@@ -1,0 +1,50 @@
+Data Quality Assessment: ev_models.csv
+============================================================
+
+Delimiter: ','
+Columns: 8
+Headers: ['make', 'model', 'market_regions', 'powertrain', 'first_year', 'body_style', 'origin_country', 'age_2025']
+Rows: 128
+File size: 6.3 KB
+
+Sample Rows (first 5):
+------------------------------------------------------------
+  Row 1: ['Tesla', 'Model S', 'Global (US/EU/UK/ME)', 'BEV', '2012', 'Sedan', 'US', '13']
+  Row 2: ['Tesla', 'Model 3', 'Global (US/EU/UK/ME/CN)', 'BEV', '2017', 'Sedan', 'US', '8']
+  Row 3: ['Tesla', 'Model X', 'Global (US/EU/UK/ME)', 'BEV', '2015', 'SUV', 'US', '10']
+  Row 4: ['Tesla', 'Model Y', 'Global (US/EU/UK/ME/CN)', 'BEV', '2020', 'SUV', 'US', '5']
+  Row 5: ['Tesla', 'Cybertruck', 'US (limited)', 'BEV', '2023', 'Pickup', 'US', '2']
+
+Column Analysis:
+------------------------------------------------------------
+  make
+    Type: TEXT | Nulls: 0 (0.0%) | Unique: 50
+    Sample values: ['Abarth', 'Alfa Romeo', 'Audi', 'BMW', 'BYD', 'Cadillac']
+
+  model
+    Type: TEXT | Nulls: 0 (0.0%) | Unique: 127
+    Sample values: ['#1', '#3', '001', '007', '009', '03 Funky Cat']
+
+  market_regions
+    Type: TEXT | Nulls: 0 (0.0%) | Unique: 40
+    Sample values: ['CN', 'CN/EU', 'CN/EU (limited)', 'CN/EU (select)', 'CN/LatAm/ME', 'CN/ME/EU (limited)']
+
+  powertrain
+    Type: TEXT | Nulls: 0 (0.0%) | Unique: 1
+    Sample values: ['BEV']
+
+  first_year
+    Type: INTEGER | Nulls: 0 (0.0%) | Unique: 13
+    Sample values: ['2010', '2012', '2015', '2016', '2017', '2018']
+
+  body_style
+    Type: TEXT | Nulls: 0 (0.0%) | Unique: 17
+    Sample values: ['City car', 'Coupe', 'Crossover', 'Hatchback', 'Liftback', 'MPV']
+
+  origin_country
+    Type: TEXT | Nulls: 0 (0.0%) | Unique: 25
+    Sample values: ['CN', 'CN/DE', 'CZ', 'China', 'Czech Republic', 'DE']
+
+  age_2025
+    Type: INTEGER | Nulls: 0 (0.0%) | Unique: 13
+    Sample values: ['0', '1', '10', '13', '15', '2']

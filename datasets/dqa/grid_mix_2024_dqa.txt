@@ -1,0 +1,56 @@
+Data Quality Assessment: grid_mix_2024.csv
+============================================================
+
+Delimiter: ','
+Columns: 10
+Headers: ['Country', 'Year', 'Nuclear_pct', 'Hydro_pct', 'Wind_pct', 'Solar_pct', 'Bio_Other_Renewables_pct', 'Gas_pct', 'Coal_pct', 'Oil_Other_pct']
+Rows: 3
+File size: 0.2 KB
+
+Sample Rows (first 5):
+------------------------------------------------------------
+  Row 1: ['France', '2024', '67', '14', '8', '4', '2', '3']...
+  Row 2: ['Germany', '2024', '0', '4', '32', '13', '9', '19']...
+  Row 3: ['Switzerland', '2024', '30', '56', '9', '3', '2', '0']...
+
+Column Analysis:
+------------------------------------------------------------
+  Country
+    Type: TEXT | Nulls: 0 (0.0%) | Unique: 3
+    Sample values: ['France', 'Germany', 'Switzerland']
+
+  Year
+    Type: INTEGER | Nulls: 0 (0.0%) | Unique: 1
+    Sample values: ['2024']
+
+  Nuclear_pct
+    Type: INTEGER | Nulls: 0 (0.0%) | Unique: 3
+    Sample values: ['0', '30', '67']
+
+  Hydro_pct
+    Type: INTEGER | Nulls: 0 (0.0%) | Unique: 3
+    Sample values: ['14', '4', '56']
+
+  Wind_pct
+    Type: INTEGER | Nulls: 0 (0.0%) | Unique: 3
+    Sample values: ['32', '8', '9']
+
+  Solar_pct
+    Type: INTEGER | Nulls: 0 (0.0%) | Unique: 3
+    Sample values: ['13', '3', '4']
+
+  Bio_Other_Renewables_pct
+    Type: INTEGER | Nulls: 0 (0.0%) | Unique: 2
+    Sample values: ['2', '9']
+
+  Gas_pct
+    Type: INTEGER | Nulls: 0 (0.0%) | Unique: 3
+    Sample values: ['0', '19', '3']
+
+  Coal_pct
+    Type: INTEGER | Nulls: 0 (0.0%) | Unique: 3
+    Sample values: ['0', '1', '23']
+
+  Oil_Other_pct
+    Type: INTEGER | Nulls: 0 (0.0%) | Unique: 1
+    Sample values: ['0']

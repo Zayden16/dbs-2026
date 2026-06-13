@@ -1,0 +1,118 @@
+Mapping: Conceptual Model -> Physical Schema -> Source Data
+=============================================================
+
+This document shows how each ER entity maps to the physical SQL tables,
+and which source datasets feed into each entity.
+
+================================================================================
+ENTITY -> TABLE -> SOURCE
+================================================================================
+
+1. COUNTRY -> country
+   Sources: fuel_prices.csv (petrol/diesel prices)
+            + derived from all country-level datasets
+   Mapping:
+     fuel_prices.Country          -> country.country_name
+     (manually mapped)            -> country.country_code (CH, DE, FR)
+     fuel_prices.Petrol_EUR_per_L -> country.petrol_price_eur_per_l
+     fuel_prices.Diesel_EUR_per_L -> country.diesel_price_eur_per_l
+
+2. VEHICLE -> vehicle
+   Sources: Cars Datasets 2025.csv (via stg_cars_2025)
+            co2.csv (via stg_co2)
+            ev_specs_database.csv (via stg_ev_specs)
+   Mapping:
+     stg_cars_2025.company_name   -> vehicle.make
+     stg_cars_2025.car_name       -> vehicle.model
+     stg_cars_2025.fuel_type      -> vehicle.fuel_type (needs standardization)
+     stg_cars_2025.price (parsed) -> vehicle.price_usd
+     stg_co2.make                 -> vehicle.make
+     stg_co2.model                -> vehicle.model
+     stg_co2.fuel_type (decoded)  -> vehicle.fuel_type
+     stg_ev_specs.car_model (split) -> vehicle.make + vehicle.model
+
+3. ICE_EMISSION -> ice_emission
+   Source: co2.csv (via stg_co2)
+   Mapping:
+     stg_co2.engine_size_l        -> ice_emission.engine_size_l
+     stg_co2.cylinders            -> ice_emission.cylinders
+     stg_co2.transmission         -> ice_emission.transmission
+     stg_co2.fuel_city            -> ice_emission.fuel_consumption_city
+     stg_co2.fuel_hwy             -> ice_emission.fuel_consumption_hwy
+     stg_co2.fuel_comb            -> ice_emission.fuel_consumption_comb
+     stg_co2.co2_gkm              -> ice_emission.co2_emissions_gkm
+
+4. EV_SPEC -> ev_spec
+   Source: ev_specs_database.csv (via stg_ev_specs)
+   Mapping:
+     stg_ev_specs.battery_capacity_kwh  -> ev_spec.battery_capacity_kwh
+     stg_ev_specs.autonomy_wltp_km      -> ev_spec.range_wltp_km
+     (derived: capacity/range*100)      -> ev_spec.energy_consumption_kwh_100km
+     stg_ev_specs.dc_charge_power_kw    -> ev_spec.dc_charge_power_kw
+     stg_ev_specs.ac_charge_power       -> ev_spec.ac_charge_power_kw (parsed)
+     stg_ev_specs.release_year          -> ev_spec.release_year
+
+5. CHARGING_STATION -> charging_station
+   Source: charging_station.csv (via stg_charging_station, filtered to CH/DE/FR)
+   Mapping:
+     stg_charging_station.id            -> charging_station.station_id
+     stg_charging_station.name          -> charging_station.name
+     stg_charging_station.city          -> charging_station.city
+     stg_charging_station.country_code  -> charging_station.country_code
+     stg_charging_station.latitude      -> charging_station.latitude
+     stg_charging_station.longitude     -> charging_station.longitude
+     stg_charging_station.ports         -> charging_station.ports
+     stg_charging_station.power_kw      -> charging_station.power_kw
+     stg_charging_station.power_class   -> charging_station.power_class
+     stg_charging_station.is_fast_dc    -> charging_station.is_fast_dc (cast to BOOL)
+
+6. CHARGING_COUNTRY_SUMMARY -> charging_country_summary
+   Source: country_summary.csv (via stg_country_summary)
+   Mapping: direct 1:1 field mapping
+
+7. ELECTRICITY_PRICE -> electricity_price
+   Sources: ch_electricity_prices_elcom.csv (via stg_ch_elec_prices)
+            eurostat_elec_prices_defr.csv (via stg_eurostat_elec_prices)
+   Mapping:
+     CH: stg_ch_elec_prices.avg_price / 100 * 0.94 -> price_eur_per_kwh
+         (Rappen -> CHF -> EUR)
+     DE/FR: stg_eurostat_elec_prices.price_eur_per_kwh -> direct
+
+8. GRID_MIX -> grid_mix
+   Source: ember_yearly_electricity.csv (via stg_ember_electricity)
+   Mapping:
+     Filtered to: area IN ('Switzerland','Germany','France')
+                  AND category = 'Electricity generation'
+     stg_ember.variable             -> grid_mix.source_type
+     stg_ember.value (where unit=TWh) -> grid_mix.generation_twh
+     stg_ember.value (where unit=%)   -> grid_mix.share_pct
+
+9. EV_ADOPTION -> ev_adoption
+   Source: iea_global_ev_data_2024.csv (via stg_iea_ev)
+   Mapping:
+     Filtered to: region IN ('Switzerland','Germany','France')
+                  AND mode = 'Cars'
+     Pivoted from long to wide:
+       parameter='EV sales'       + unit='Vehicles' -> ev_adoption.ev_sales
+       parameter='EV stock'       + unit='Vehicles' -> ev_adoption.ev_stock
+       parameter='EV sales share' + unit='percent'  -> ev_adoption.ev_sales_share_pct
+       parameter='EV stock share' + unit='percent'  -> ev_adoption.ev_stock_share_pct
+
+================================================================================
+3NF VERIFICATION
+================================================================================
+
+All tables are in 3rd Normal Form:
+- 1NF: All columns contain atomic values, no repeating groups
+- 2NF: All non-key attributes fully depend on the entire primary key
+- 3NF: No transitive dependencies — non-key attributes depend only on the PK
+
+Key design decisions:
+- VEHICLE is split from ICE_EMISSION and EV_SPEC to avoid NULL columns
+  (an ICE vehicle has no battery_capacity; an EV has no engine_size)
+- ELECTRICITY_PRICE unifies CH (ElCom) and DE/FR (Eurostat) into one table
+  after currency conversion
+- GRID_MIX stores the long-format Ember data per source type, avoiding
+  wide tables with many nullable columns
+- EV_ADOPTION pivots the IEA long format into a readable wide structure
+- Staging tables (stg_*) hold raw imported data for ELT transformation

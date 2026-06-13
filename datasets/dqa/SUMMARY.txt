@@ -1,0 +1,135 @@
+DQA Summary - "Are EVs Really Better?" Project
+================================================
+
+10 datasets (trimmed from 16 — removed redundant/overlapping files).
+
+================================================================================
+1. Cars Datasets 2025.csv (1,218 rows | 11 cols | 122 KB)
+   Source: Kaggle - car specs & prices
+   Quality: MODERATE - needs heavy cleaning
+   Issues:
+   - All numeric fields stored as TEXT with units ("963 hp", "$460,000", "340 km/h")
+   - Price ranges present ("$10,000 - $12,000") - need parsing strategy
+   - CC/Battery Capacity has 3 nulls, mixed formats ("3990 cc" vs "75 kWh")
+   - Performance column has 6 nulls, inconsistent spacing ("10. 5 sec")
+   - Fuel Types: 23 unique values including EV ("Electric") - good for our use case
+   - No country column - global dataset
+   Transformation needed: Strip units, parse ranges, split EV vs ICE, standardize names
+
+2. co2.csv (7,385 rows | 12 cols | 465 KB)
+   Source: Kaggle - vehicle CO2 emissions
+   Quality: EXCELLENT - very clean
+   Issues:
+   - Fuel Type uses codes (D=Diesel, E=E85, N=Natural Gas, X=Regular, Z=Premium)
+   - No EV entries (fuel consumption based) - useful for ICE baseline only
+   - No country column - appears to be Canadian data
+   - 0 nulls across all columns
+   Transformation needed: Decode fuel types, can be used as ICE CO2 reference
+
+3. ev_specs_database.csv (67 rows | 12 cols | 8 KB)
+   Source: GitHub - EV specs with battery/range/charging
+   Quality: GOOD
+   Issues:
+   - Some fields have "empty" or "NA" as text values
+   - Prices in mixed format ("70" = $70k)
+   - Small but has key data: Battery_Capacity_kWh, Autonomy_WLTP_Km
+   Transformation needed: Clean "empty"/"NA" values, derive kWh/100km
+
+4. iea_global_ev_data_2024.csv (12,654 rows | 8 cols | 856 KB)
+   Source: IEA Global EV Data Explorer (via GitHub mirror)
+   Quality: VERY GOOD
+   Issues:
+   - Long format: region/category/parameter/mode/powertrain/year/unit/value
+   - Covers stock, sales, share for cars/buses/trucks/vans
+   - BEV + PHEV + EV aggregates
+   - CH, DE, FR all present
+   Transformation needed: Filter to Cars + CH/DE/FR, pivot parameters
+
+5. charging_station.csv (242,417 rows | 11 cols | 23 MB)
+   Source: GitHub - global EV charging stations
+   Quality: GOOD - some cleaning needed
+   Issues:
+   - power_kw: 4,660 nulls (1.9%)
+   - city: messy data ("Unknown City", postal codes mixed in)
+   - state_province: messy ("UNKNOWN", random numbers, abbreviations)
+   - ports: contains negative values ("-4")
+   - 121 countries covered, lat/long available for mapping
+   Transformation needed: Filter to CH/DE/FR, clean city/state, handle null power
+
+6. country_summary.csv (121 rows | 6 cols | 6 KB)
+   Source: GitHub - charging per country
+   Quality: EXCELLENT - no nulls
+   Issues: None significant
+   Key data: station_count, port_count, fast_station_share per country
+   Ready to use as-is
+
+7. ember_yearly_electricity.csv (359,796 rows | 18 cols | 45 MB)
+   Source: Ember - global electricity generation data
+   Quality: GOOD - largest dataset
+   Issues:
+   - ISO 3 code: 21,582 nulls (6%) - regional aggregates
+   - Continent/Ember region: 21,582 nulls (6%) - same reason
+   - Long format: Category/Subcategory/Variable/Unit/Value structure
+   - 228 areas, years 2000-2025, rich energy source breakdown
+   - Need to pivot for our use case
+   Transformation needed: Filter CH/DE/FR, pivot from long to wide, filter relevant variables
+
+8. ch_electricity_prices_elcom.csv (16 rows | 5 cols | 4 KB)
+   Source: ElCom SPARQL endpoint (https://ld.admin.ch/query)
+   Quality: GOOD
+   Issues:
+   - Prices in Rappen/kWh (Swiss centimes), need /100 then CHF->EUR
+   - Average across ~3000 providers per year (2011-2026)
+   - Min values include 0.0 in some years (likely data errors)
+   Ready to use after unit conversion
+
+9. eurostat_elec_prices_defr.csv (73 rows | 3 cols | 4 KB)
+   Source: Eurostat API (nrg_pc_204)
+   Quality: EXCELLENT
+   Issues: None
+   - DE: 37 semi-annual periods (2007-2025)
+   - FR: 36 semi-annual periods (2007-2025)
+   - EUR/kWh, household band 1000-2499 kWh, incl. taxes
+   Ready to use as-is
+
+10. fuel_prices.csv (3 rows | 3 cols | static)
+    Quality: PERFECT - manually created reference data
+    CH/DE/FR petrol and diesel prices in EUR/L
+
+================================================================================
+OVERALL ASSESSMENT
+================================================================================
+
+Strengths:
+- Full coverage of all dimensions: cars, CO2, charging, electricity, prices, EV adoption
+- All 3 countries (CH/DE/FR) covered for electricity prices
+- EV adoption data from IEA (2010-2024)
+- EV consumption derivable from ev_specs_database
+- Charging data extensive (242k stations globally)
+- Ember electricity data comprehensive (360k rows, 25 years)
+
+Challenges:
+- Cars dataset needs significant parsing (units in text, price ranges)
+- CO2 dataset covers ICE only - EV consumption from ev_specs_database
+- CH electricity prices in Rappen/kWh, need currency conversion
+- Ember data in long format, needs pivot
+
+Recommended Loading Order:
+1. co2.csv - clean, load directly
+2. country_summary.csv - clean, small
+3. ev_specs_database.csv - clean, small
+4. iea_global_ev_data_2024.csv - clean, filter to CH/DE/FR
+5. eurostat_elec_prices_defr.csv - clean, small
+6. ch_electricity_prices_elcom.csv - clean, small
+7. fuel_prices.csv - static, direct load
+8. charging_station.csv - large, filter to CH/DE/FR
+9. Cars Datasets 2025.csv - needs parsing pipeline
+10. ember_yearly_electricity.csv - large, needs pivot
+
+Removed Datasets (redundant):
+- charging_station_ml.csv (aggregated from charging_station.csv)
+- world_summary.csv (superset of country_summary.csv)
+- owid_energy.csv (130 cols, sparse; ember covers grid mix better)
+- ev_models.csv (basic catalog; ev_specs_database has consumption data)
+- grid_mix_2024.csv (static snapshot; derivable from ember)
+- electricity_prices_fr.csv (superseded by eurostat_elec_prices_defr.csv)
