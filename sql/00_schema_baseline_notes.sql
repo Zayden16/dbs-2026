@@ -1,0 +1,16 @@
+-- SW06 / Kap. Effizienz: dokumentierter Ausgangszustand (Railway `ev_project`)
+-- Ausgeführt: Schema-Introspektion via SHOW INDEX / SHOW CREATE TABLE (Team kann erneut prüfen).
+--
+-- MySQL-Version: 9.4.0 (unterstützt EXPLAIN ANALYZE und EXPLAIN FORMAT=TREE).
+--
+-- Bereits vorhandene Indizes (relevant für `artifacts/workbook_ch5_analytics/03_ev_ice_decision.sql`):
+--   vehicle:        PRIMARY(vehicle_id), idx_vehicle_fuel_type(fuel_type), idx_vehicle_make(make)
+--   ice_emission:   PRIMARY(ice_emission_id), idx_ice_vehicle(vehicle_id)
+--   ev_spec:        PRIMARY(ev_spec_id), idx_ev_vehicle(vehicle_id)
+--   country:        PRIMARY(country_code)
+--   electricity_price: PRIMARY, UNIQUE(country_code,year,half_year), idx_elec_price_country_year(country_code,year)
+--
+-- Engpass vor Optimierung: `stg_ember_electricity` hatte keinen Index; der Optimizer wählte einen
+-- Full Table Scan (~360k Zeilen) für die CTE `grid_intensity`.
+--
+-- Siehe auch: `02_create_index_ember_analytics.sql`, Messwerte in `messungen_referenz.md`.
