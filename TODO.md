@@ -19,10 +19,10 @@ dark — assume Yazdan covers the viz queries (now in `metabase/`).
 
 - [ ] **Kap. 5.1 SQL result table is STALE.** Shows CH 0.1746/0.0420/7.28, DE 0.1816/0.0721/81.97, FR 0.1781/0.0494/15.34. Replace with the canonical table above (now identical to 5.2 Mongo). *(Tabelle 14, Abb. 15 screenshot must be re-shot.)*
 - [x] **`analytics_view` now exists** — created live (`sql/07_create_analytics_view.sql`), the SQL analogue of Mongo's `mv_ev_decision`, read by Metabase. `SELECT * FROM analytics_view` reproduces the canonical table.
-- [ ] **Kap. 5.1 + 7.1.1 query snippets: fix column names** to match the view: `ice_eur_per_km, ev_eur_per_km, ev_co2_g_per_km, ice_co2_g_per_km, recommend_ev, ratio_cost, ratio_co2` (current snippets use `avg_ice_cost_per_km`/`bev_recommended` which don't exist). The `FROM analytics_view` reference is now correct — keep it.
-- [ ] **Kap. 7.1.1 `WHERE {{country}}`** → use `WHERE country_code = {{country}}` (variable form). See `metabase/mysql_queries.sql` Q1.
+- [x] **Kap. 5.1 + 7.1.1 query snippets: column names fixed** to match the view (`ice_eur_per_km … recommend_ev, ratio_cost, ratio_co2`); `FROM analytics_view` kept.
+- [x] **Kap. 7.1.1 `WHERE country_code = {{country}}`** (variable form).
 - [ ] **Kap. 7.1 prose contradicts the result.** "Bei 15000 km … überwiegen in der Schweiz die höheren Anschaffungskosten …" implies EV NOT worth it in CH, but `recommend_ev=1` for CH and Kap. 7.1.4 says EV recommended. Rewrite to: EV recommended in all 3 countries (cost-ratio <110 %, CO₂-ratio <100 %); acquisition-price caveat is the indicative TCO chart only.
-- [ ] **Kap. 5.2 Mongo code snippet is missing the ICE `fuel_type` filter.** Shown `$match` only has `fuel_consumption_comb>0 & co2>0` → would yield ~250, not the 235 in its own result table. Add `fuel_type: { $in: ["Petrol","Diesel"] }` (the real `04_analytics.js` has it).
+- [x] **Kap. 5.2 Mongo snippet: `fuel_type` filter added** to Stage 1 `$match` (`fuel_type: { $in: ["Petrol","Diesel"] }`) + stage-list description — now consistent with the 235 result and `04_analytics.js`.
 - [ ] **Kap. 5 metric definition:** "ICE Kosten: … × Kraftstoffpreis des Landes" (singular) — actual = mean of petrol & diesel. Reword to `(Benzin+Diesel)/2`.
 
 ## P1 — Stale numbers / inaccurate mechanism
