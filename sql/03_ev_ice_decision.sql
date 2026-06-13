@@ -82,8 +82,10 @@ SELECT
     THEN 1
     ELSE 0
   END AS recommend_ev,
-  1.10 AS r_cost,
-  1.00 AS r_co2
+  -- actual EV/ICE ratios (recommend thresholds: cost <= 1.10, co2 <= 1.00)
+  ROUND((e.price_eur_per_kwh * ev.kwh_per_100km / 100.0)
+        / ((c.petrol_price_eur_per_l + c.diesel_price_eur_per_l) / 2.0 * i.l_per_100km / 100.0), 2) AS ratio_cost,
+  ROUND((g.co2_g_per_kwh * ev.kwh_per_100km / 100.0) / i.co2_gkm_tailpipe, 2) AS ratio_co2
 FROM country c
 CROSS JOIN ice_fleet i
 CROSS JOIN ev_fleet ev
