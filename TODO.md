@@ -40,7 +40,7 @@ dark — assume Yazdan covers the viz queries (now in `metabase/`).
 - [x] **Broken numbering:** `7.1.5` → `7.2 (break even/` → `8.2 [TODO]`. Renumber cleanly (7.1.x under 7.1; real second use case = 7.2; Fazit = 8).
 - [x] **Kap. 4.1.1 Datenflüsse** has `[TODO: draw.io]` — either keep ASCII (fine) or redraw; remove the TODO marker.
 - [x] **Q5 numbering:** Kap. 7.1.2 lists Q1,Q2,Q3,Q4,Q6 (Q5 = charging, skipped); Kap. 8.2 TODO cites Q5. Q5 exists in `metabase/mongodb_native_queries.md` — add it or fix the cross-ref.
-- [ ] **Dashboard screenshots** (Abb. 24–28) — capture from Metabase once panels built from `metabase/` queries.
+- [x] **Metabase dashboard built + interactive** (Land + km/Jahr + Jahre filters; SQL & Mongo decision cards both parametrized, identical results). Screenshots Abb. 24–28 captured.
 
 ## P3 — Scope/framing (lower risk, do if time)
 
