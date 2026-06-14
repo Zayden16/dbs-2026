@@ -293,7 +293,10 @@ const mvPipeline = [
           then: 1,
           else: 0
         }
-      }
+      },
+      // Mirror SQL analytics_view: ratio_cost = ev/ice cost, ratio_co2 = ev/ice CO2.
+      ratio_cost: { $round: [{ $divide: ["$ev_cost", "$ice_cost"] }, 2] },
+      ratio_co2: { $round: [{ $divide: ["$ev_co2", "$ice_co2"] }, 2] }
     }
   },
   { $sort: { country: 1 } },

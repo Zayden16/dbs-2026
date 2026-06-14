@@ -30,7 +30,7 @@ print("Query 1: EV vs ICE Decision (from materialized view)");
 printjson(
   db.mv_ev_decision.find(
     {},
-    { _id: 0, country: 1, ice_cost: 1, ev_cost: 1, ev_co2: 1, ice_co2: 1, recommend_ev: 1 }
+    { _id: 0, country: 1, ice_cost: 1, ev_cost: 1, ev_co2: 1, ice_co2: 1, recommend_ev: 1, ratio_cost: 1, ratio_co2: 1 }
   ).sort({ country: 1 }).toArray()
 );
 print("");
